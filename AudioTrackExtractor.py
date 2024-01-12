@@ -33,7 +33,9 @@ def extract_audio_tracks(video_file, output_dir):
             continue
         command = ['ffmpeg', '-y', '-i', video_file, '-map', f'0:a:{i}', output_file]
         subprocess.run(command)
-        
+    
+    return True
+
 def main():
     root = tk.Tk()
     root.title("Audio Extractor")
