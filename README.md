@@ -1,6 +1,8 @@
 # Audio Track Extractor by Aggemror
 I created this tool to more easily extract several audio tracks from one video file and convert them into separate audio files.
 
+<img src="images/menu.png">
+
 ## How to Use
 1. Run the script.
 2. Click on "Browse Video File" to select the video file.
