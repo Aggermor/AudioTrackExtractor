@@ -23,10 +23,17 @@ def browse_folder():
 
 def main():
     root = tk.Tk()
-    root.withdraw()  # Hide the main window
-    video_file = browse_file()  # Ask the user to select a file
-    output_dir = browse_folder()  # Ask the user to select a folder
-    extract_audio_tracks(video_file, output_dir)
+    root.title("Audio Extractor")
+
+    def start_extraction():
+        video_file = browse_file()  # Ask the user to select a file
+        output_dir = browse_folder()  # Ask the user to select a folder
+        extract_audio_tracks(video_file, output_dir)
+
+    browse_button = tk.Button(root, text="Browse", command=start_extraction)
+    browse_button.pack()
+
+    root.mainloop()
 
 if __name__ == "__main__":
     main()
