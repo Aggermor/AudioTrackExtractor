@@ -3,7 +3,6 @@ import subprocess
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
-from tkinter import simpledialog
 
 def extract_audio_tracks(video_file, output_dir):
     command = ['ffprobe', '-v', 'error', '-select_streams', 'a', '-show_entries', 'stream=index', '-of', 'csv=p=0', video_file]
@@ -24,15 +23,13 @@ def extract_audio_tracks(video_file, output_dir):
             if result is None:  # Cancel
                 return
             elif result:  # Yes
-                overwrite_all = True
-                if simpledialog.askyesno("Apply to all", "Apply this action to all existing files?", icon='info'):
-                    overwrite_all = 'all'
+                overwrite_all = messagebox.askyesno("Apply to all", "Apply this action to all existing files?", icon='info')
         if not overwrite_all:  # No
             return
 
     for i in range(num_tracks):
         output_file = os.path.join(output_dir, f"audio_track_{i}.mp3")
-        if os.path.exists(output_file) and overwrite_all != 'all':
+        if os.path.exists(output_file) and overwrite_all != True:
             continue
         command = ['ffmpeg', '-y', '-i', video_file, '-map', f'0:a:{i}', output_file]
         subprocess.run(command)
