@@ -45,14 +45,20 @@ def main():
         if video_file.get() and output_dir.get():
             extract_audio_tracks(video_file.get(), output_dir.get())
 
-    browse_file_button = tk.Button(root, text="Browse Video File", command=browse_file)
-    browse_file_button.pack()
+    browse_file_button = tk.Button(root, text="Browse Video File", command=browse_file, anchor='w')
+    browse_file_button.pack(fill='x')
 
-    browse_folder_button = tk.Button(root, text="Browse Destination Folder", command=browse_folder)
-    browse_folder_button.pack()
+    video_file_label = tk.Label(root, textvariable=video_file, anchor='w')
+    video_file_label.pack(fill='x')
 
-    convert_button = tk.Button(root, text="Convert", command=start_extraction, state=tk.DISABLED)
-    convert_button.pack()
+    browse_folder_button = tk.Button(root, text="Browse Destination Folder", command=browse_folder, anchor='w')
+    browse_folder_button.pack(fill='x')
+
+    output_dir_label = tk.Label(root, textvariable=output_dir, anchor='w')
+    output_dir_label.pack(fill='x')
+
+    convert_button = tk.Button(root, text="Convert", command=start_extraction, state=tk.DISABLED, anchor='w')
+    convert_button.pack(fill='x')
 
     def check_convert_button_state(*args):
         if video_file.get() and output_dir.get():
@@ -63,8 +69,8 @@ def main():
     video_file.trace("w", check_convert_button_state)
     output_dir.trace("w", check_convert_button_state)
 
-    exit_button = tk.Button(root, text="Exit", command=root.destroy)
-    exit_button.pack()
+    exit_button = tk.Button(root, text="Exit", command=root.destroy, anchor='w')
+    exit_button.pack(fill='x')
 
     root.mainloop()
 
