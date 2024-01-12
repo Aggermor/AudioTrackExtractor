@@ -1,3 +1,7 @@
+# Audio Track Extractor by Aggermor
+# Version 1.0
+
+
 import os
 import subprocess
 import tkinter as tk
