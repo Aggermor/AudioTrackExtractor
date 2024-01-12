@@ -51,8 +51,11 @@ def main():
 
     def start_extraction():
         if video_file.get() and output_dir.get():
-            extract_audio_tracks(video_file.get(), output_dir.get())
-            messagebox.showinfo("Extraction Complete", "All audio tracks extracted into separate files.")
+            success = extract_audio_tracks(video_file.get(), output_dir.get())
+            if success:
+                messagebox.showinfo("Extraction Complete", "All audio tracks extracted into separate files.")
+            else:
+                messagebox.showinfo("Extraction Cancelled", "The audio track extraction was cancelled.")
 
     button_width = 20
 
