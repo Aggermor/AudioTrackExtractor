@@ -11,19 +11,30 @@ def extract_audio_tracks(video_file, output_dir):
     num_tracks = len(result.stdout.decode().split('\n')) - 1
 
     overwrite_all = None
+    existing_files = []
 
     for i in range(num_tracks):
         output_file = os.path.join(output_dir, f"audio_track_{i}.mp3")
-        if os.path.exists(output_file) and overwrite_all is not True:
-            if overwrite_all is None:
-                result = messagebox.askyesnocancel("File exists", "The file already exists. Do you want to overwrite it?", icon='warning')
-                if result is None:  # Cancel
-                    break
-                elif result:  # Yes
-                    overwrite_all = simpledialog.askyesno("Apply to all", "Apply this action to all existing files?", icon='info')
-            else:  # No
-                continue
-        command = ['ffmpeg', '-i', video_file, '-map', f'0:a:{i}', output_file]
+        if os.path.exists(output_file):
+            existing_files.append(output_file)
+
+    if existing_files and overwrite_all is not True:
+        if overwrite_all is None:
+            result = messagebox.askyesnocancel("Files exist", "Some files already exist. Do you want to overwrite them?", icon='warning')
+            if result is None:  # Cancel
+                return
+            elif result:  # Yes
+                overwrite_all = True
+                if simpledialog.askyesno("Apply to all", "Apply this action to all existing files?", icon='info'):
+                    overwrite_all = 'all'
+        if not overwrite_all:  # No
+            return
+
+    for i in range(num_tracks):
+        output_file = os.path.join(output_dir, f"audio_track_{i}.mp3")
+        if os.path.exists(output_file) and overwrite_all != 'all':
+            continue
+        command = ['ffmpeg', '-y', '-i', video_file, '-map', f'0:a:{i}', output_file]
         subprocess.run(command)
 
 def main():
