@@ -63,6 +63,9 @@ def main():
     video_file.trace("w", check_convert_button_state)
     output_dir.trace("w", check_convert_button_state)
 
+    exit_button = tk.Button(root, text="Exit", command=root.destroy)
+    exit_button.pack()
+
     root.mainloop()
 
 if __name__ == "__main__":
