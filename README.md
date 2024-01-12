@@ -1,6 +1,8 @@
 # Audio Track Extractor by Aggemror
 I created this tool to more easily extract several audio tracks from one video file and convert them into separate audio files.
 
+***My use case:** using OBS to record multiple audio tracks like System, Mic, Discord, Music into one file this tool can seperate each track into it's own file.*
+
 <img src="images/menu.png">
 
 ## How to Use
